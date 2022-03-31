@@ -12,9 +12,13 @@
 		}
 		public double[] A { get; set; }
 
-		public void Init(int N, double[] A) {
-			this.N = N;
-			this.A = A;
+		public bool Init(int N, double[] A) {
+			if (N > 0) {
+				this.N = N;
+				this.A = A;
+				return true;
+			}
+			return false;
 		}
 		
 		public VectorN Add(VectorN v) {
@@ -53,14 +57,24 @@
 			return result;
 		}
 		public void Read() {
-			Console.Write("Enter number of elements: ");
-			this.N = Convert.ToInt32(Console.ReadLine());
-			this.A = new double[N];
-			for (int i = 0; i < this.N; i++) {
-				Console.Write($"Enter numnber {i + 1}:");
-				A[i] = Convert.ToDouble(Console.ReadLine());
-			}
-			Console.WriteLine();
+			bool initExecuted = false;
+			do {
+				Console.Write("Enter number of elements: ");
+				int n = Convert.ToInt32(Console.ReadLine());
+				double[] a = new double[n];
+				for (int i = 0; i < n; i++) {
+					Console.Write($"Enter numnber {i + 1}:");
+					a[i] = Convert.ToDouble(Console.ReadLine());
+				}
+				Console.WriteLine();
+				if (Init(n, a)) {
+					initExecuted = true;
+				}
+				else {
+					Console.WriteLine("Number of elements should be greater than zero!");
+					Console.WriteLine("Please, try again");
+				}
+			} while (!initExecuted);
 		}
 		public void Display() {
 			Console.WriteLine(this.VectorToString());

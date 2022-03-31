@@ -8,7 +8,18 @@
 			Console.WriteLine("Vector s after changes (s + s):");
 			s = s.Add(s);
 			s.Display();
-			Console.WriteLine($"Scalar (s, s): {s.Scalar(s)}");
+			Console.WriteLine($"Scalar (s, s): {s.Scalar(s)}\n");
+
+			VectorN v = new VectorN();
+			v.Read();
+			Console.WriteLine("Vector V:");
+			v.Display();
+			Console.WriteLine("Vector S:");
+			s.Display();
+			Console.WriteLine("Vector C = S - V:");
+			s = s.Substract(v);
+			s.Display();
+			Console.WriteLine($"Scalar (s, v): {s.Scalar(v)}");
 		}
 	}
 }
