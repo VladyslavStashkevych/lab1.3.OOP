@@ -1,41 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace lab1_3 {
+﻿namespace lab1_3 {
 	public class VectorN {
-		int N { get; set; }
+		int n;
+		public int N {
+			get => n;
+			set {
+				if (value >= 0) {
+					n = value;
+					A = new double[n];
+				}
+			}
+		}
 		public double[] A { get; set; }
 
 		public void Init(int N, double[] A) {
 			this.N = N;
 			this.A = A;
 		}
-
-		public bool Add(VectorN v) {
+		
+		public VectorN Add(VectorN v) {
+			VectorN result = new VectorN();
 			if (this.N != v.N) {
 				Console.WriteLine("Vectors should have same size");
-				return false;
+				return result;
 			}
+			result.N = this.N;
 			for (int i = 0; i < this.N; i++) {
-				this.A[i] += v.A[i];
+				result.A[i] = this.A[i] + v.A[i];
 			}
-			return true;
+			return result;
 		}
-
-		public bool Substract(VectorN v) {
+		public VectorN Substract(VectorN v) {
+			VectorN result = new VectorN();
 			if (this.N != v.N) {
 				Console.WriteLine("Vectors should have same size");
-				return false;
+				return result;
 			}
+			result.N = this.N;
 			for (int i = 0; i < this.N; i++) {
-				this.A[i] -= v.A[i];
+				result.A[i] = this.A[i] - v.A[i];
 			}
-			return true;
+			return result;
 		}
-
 		public double Scalar(VectorN v) {
 			double result = 0;
 			if (this.N != v.N) {
@@ -47,7 +52,6 @@ namespace lab1_3 {
 			}
 			return result;
 		}
-
 		public void Read() {
 			Console.Write("Enter number of elements: ");
 			this.N = Convert.ToInt32(Console.ReadLine());
@@ -58,11 +62,10 @@ namespace lab1_3 {
 			}
 			Console.WriteLine();
 		}
-
 		public void Display() {
 			Console.WriteLine(this.VectorToString());
 		}
-
-		public string VectorToString() => String.Join(" ", A.Select(c => $"{c}"));
+		public string VectorToString()
+				=> String.Join(" ", A.Select(c => $"{c}"));
 	}
 }

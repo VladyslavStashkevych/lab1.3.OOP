@@ -1,6 +1,5 @@
-using System;
-using Xunit;
 using lab1_3;
+using Xunit;
 
 namespace VectorNTests {
 	public class Tests {
@@ -11,16 +10,17 @@ namespace VectorNTests {
 			// Arrange
 			VectorN s = new VectorN();
 			VectorN v = new VectorN();
+			double[] res = new double[a.Length];
 			s.Init(a.Length, a);
 			v.Init(f.Length, f);
 			for (int i = 0; i < a.Length; i++)
-				a[i] += f[i];
+				res[i] = a[i] + f[i];
 
 			// Act
-			s.Add(v);
+			VectorN result = s.Add(v);
 
 			// Assert
-			Assert.Equal(a, s.A);
+			Assert.Equal(res, result.A);
 		}
 		[Theory]
 		[InlineData(new double[] { 3, 2, 1 }, new double[] { 3, 2, 1 })]
@@ -29,16 +29,17 @@ namespace VectorNTests {
 			// Arrange
 			VectorN s = new VectorN();
 			VectorN v = new VectorN();
+			double[] res = new double[a.Length];
 			s.Init(a.Length, a);
 			v.Init(f.Length, f);
 			for (int i = 0; i < a.Length; i++)
-				a[i] -= f[i];
+				res[i] = a[i] - f[i];
 
 			// Act
-			s.Substract(v);
+			VectorN result = s.Substract(v);
 
 			// Assert
-			Assert.Equal(a, s.A);
+			Assert.Equal(res, result.A);
 		}
 		[Theory]
 		[InlineData(new double[] { 3, 2, 1 }, new double[] { 3, 2, 1 })]
@@ -60,5 +61,4 @@ namespace VectorNTests {
 			Assert.Equal(result, actual);
 		}
 	}
-	
 }
